@@ -10,7 +10,7 @@ import { thirdweb } from '../assets';
 const CampaignDetails = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const { donate, getDonations, contract, address } = useStateContext();
+  const { donate, getDonations, contract, address , refund ,Withdraw} = useStateContext();
 
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState('');
@@ -37,7 +37,13 @@ const CampaignDetails = () => {
     navigate('/')
     setIsLoading(false);
   }
+  const Reufund = async() =>{
+    refund(state.pId)
+  }
 
+  const withdraw = async() =>{
+    Withdraw(state.pId)
+  }
   return (
     <div>
       {isLoading && <Loader />}
@@ -146,8 +152,17 @@ const CampaignDetails = () => {
                 btnType="button"
                 title="Refund"
                 styles="w-full bg-[#FD6C7B]"
-                handleClick={handleDonate}
+                handleClick={Reufund}
               />
+              <div style={{paddingTop : "15px"}}>
+              <CustomButton
+
+                btnType="button"
+                title="Withdraw"
+                styles="w-full bg-[#4acd8d]"
+                handleClick={withdraw}
+              />
+              </div>
               </div>}
           </div>
         </div>
