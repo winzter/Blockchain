@@ -20,7 +20,8 @@ const CampaignDetails = () => {
 
   const fetchDonators = async () => {
     const data = await getDonations(state.pId);
-
+    console.log(state)
+    console.log(address)
     setDonators(data);
   }
 
@@ -101,7 +102,17 @@ const CampaignDetails = () => {
           <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Fund</h4>   
 
           <div className="mt-[20px] flex flex-col p-4 bg-[#1c1c24] rounded-[10px]">
-            <p className="font-epilogue fount-medium text-[20px] leading-[30px] text-center text-[#808191]">
+            { state.owner != address && remainingDays <0 &&<div><p className="font-epilogue fount-medium text-[20px] leading-[30px] text-center text-[#808191]">
+              End campaign
+            </p>
+            <div className="mt-[30px]">
+              <div className="my-[20px] p-4 bg-[#13131a] rounded-[10px]">
+                <h4 className="font-epilogue font-semibold text-[14px] leading-[22px] text-white">The campaign has ended.</h4>
+                <p className="mt-[20px] font-epilogue font-normal leading-[22px] text-[#808191]">Thank you for your support.</p>
+              </div>
+              </div>
+            </div> }
+            { state.owner != address && remainingDays >0 &&<div><p className="font-epilogue fount-medium text-[20px] leading-[30px] text-center text-[#808191]">
               Fund the campaign
             </p>
             <div className="mt-[30px]">
@@ -125,7 +136,19 @@ const CampaignDetails = () => {
                 styles="w-full bg-[#8c6dfd]"
                 handleClick={handleDonate}
               />
-            </div>
+              </div>
+            </div> }
+            { state.owner == address &&<div><p className="font-epilogue fount-medium text-[20px] leading-[30px] text-center text-[#808191]">
+              Refund the campaign
+            </p>
+              <br></br>
+              <CustomButton 
+                btnType="button"
+                title="Refund"
+                styles="w-full bg-[#FD6C7B]"
+                handleClick={handleDonate}
+              />
+              </div>}
           </div>
         </div>
       </div>
